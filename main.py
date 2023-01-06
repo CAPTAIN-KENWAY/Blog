@@ -47,7 +47,7 @@ def admins_only(func):
 
 def send_mail(name, email, phone, message):
     msg = f"Subject:New Message\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}"
-    with smtplib.SMTP("smtp.gmail.com") as connection:
+    with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
         connection.starttls()
         connection.login(user=EMAIL, password=PASSWORD)
         connection.sendmail(
