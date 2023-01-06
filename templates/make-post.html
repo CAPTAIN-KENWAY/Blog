@@ -1,0 +1,79 @@
+{% include "header.html" %}
+{% if '/new-post' in request.url %}
+<title>Create Post</title>
+{% else %}
+<title>Edit Post</title>
+{% endif %}
+<script src="https://cdn.ckeditor.com/4.20.1/full-all/ckeditor.js"></script>
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='img/edit-bg.jpg')}}')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          {% if '/new-post' in request.url %}
+          <h1>New Post</h1>
+          {% else %}
+          <h1>Edit Post</h1>
+          {% endif %}
+          <span class="subheading">You're going to make a great blog post!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+      <!-- This is where the form will go -->
+      {% if '/new-post' in request.url %}
+      <form action="{{ url_for('add') }}" method="post" novalidate>
+      {% else %}
+      <form action="{{ url_for('edit', post_id=id) }}" method="post" novalidate>
+      {% endif %}
+      
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+          {{ form.title.label(class_='form-label') }} <br> {{ form.title(autofocus=True, class_='form-control') }}
+          {% for err in form.title.errors %}
+          <span style="color: red;">{{ err }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group">
+          {{ form.subtitle.label(class_='form-label') }} <br> {{ form.subtitle(class_='form-control') }}
+          {% for err in form.subtitle.errors %}
+          <span style="color: red;">{{ err }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group">
+          {{ form.img_url.label(class_='form-label') }} <br> {{ form.img_url(class_='form-control') }}
+          {% for err in form.img_url.errors %}
+          <span style="color: red;">{{ err }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group">
+          {{ form.body.label(class_='form-label') }} <br> {{ form.body(class_='form-control') }}
+          {% for err in form.body.errors %}
+          <span style="color: red;">{{ err }}</span>
+          {% endfor %}
+        </div>
+
+        {{ form.submit(class_='btn btn-primary') }}
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{{ ckeditor.config(name='body', height='500') }}
+
+{% include "footer.html" %}

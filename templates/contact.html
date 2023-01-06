@@ -1,0 +1,77 @@
+{% include "header.html" %}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='img/contact-bg.jpg')}}')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <h1>Contact Me</h1>
+          <span class="subheading">Have questions? I have answers.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      {% if msg_sent: %}
+      <div class="alert alert-primary">
+        Successfully sent the message.
+      </div>
+      {% endif %}
+      
+      <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as
+        possible!</p>
+      <form action="{{ url_for('contact') }}" method="post" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+          {{ form.name.label(class_='form-label') }}
+          <br>
+          {{ form.name(class_='form-control', placeholder='Enter your name...') }}
+          {% for err in form.name.errors %}
+          <span style="color: red;">{{ err }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group">
+          {{ form.email.label(class_='form-label') }}
+          <br>
+          {{ form.email(autofocus=True, class_='form-control', placeholder='Enter your email...') }}
+          {% for err in form.email.errors %}
+          <span style="color: red;">{{ err }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group">
+          {{ form.phone.label(class_='form-label') }}
+          <br>
+          {{ form.phone(class_='form-control', placeholder='Enter your phone number...') }}
+          {% for err in form.phone.errors %}
+          <span style="color: red;">{{ err }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group">
+          {{ form.message.label(class_='form-label') }}
+          <br>
+          {{ form.message(class_='form-control', placeholder='Type your message...', rows='10') }}
+          {% for err in form.message.errors %}
+          <span style="color: red;">{{ err }}</span>
+          {% endfor %}
+        </div>
+
+        {{ form.submit(class_='btn btn-primary') }}
+      </form>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+{% include "footer.html" %}
