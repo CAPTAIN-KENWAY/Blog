@@ -10,13 +10,15 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm, ContactF
 from flask_gravatar import Gravatar
 from functools import wraps
 import smtplib
+from dotenv.main import load_dotenv
+import os
 
-
-EMAIL = "pythontesting810@gmail.com"
-PASSWORD = "jflzmvkrbbuhavxz"
+load_dotenv()
+EMAIL = os.environ['EMAIL']
+PASSWORD = os.environ['PASSWORD']
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
