@@ -23,7 +23,7 @@ ckeditor = CKEditor(app)
 Bootstrap(app)
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -50,8 +50,6 @@ def send_mail(name, email, phone, message):
     with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
         connection.starttls()
         connection.login(user=EMAIL, password=PASSWORD)
-        print(EMAIL)
-        print(PASSWORD)
         connection.sendmail(
             from_addr=EMAIL,
             to_addrs="guptakaran094@gmail.com",
@@ -244,6 +242,6 @@ def delete(post_id):
 
 
 if __name__ == "__main__":
-    # with app.app_context():
-    #     db.create_all()
+    with app.app_context():
+        db.create_all()
     app.run(host='0.0.0.0', port=5000)
