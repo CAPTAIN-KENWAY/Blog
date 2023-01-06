@@ -50,6 +50,8 @@ def send_mail(name, email, phone, message):
     with smtplib.SMTP("smtp.gmail.com") as connection:
         connection.starttls()
         connection.login(user=EMAIL, password=PASSWORD)
+        print(EMAIL)
+        print(PASSWORD)
         connection.sendmail(
             from_addr=EMAIL,
             to_addrs="guptakaran094@gmail.com",
