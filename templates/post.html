@@ -24,9 +24,18 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
         {{ post.body|safe }}
         <hr>
-        {% if current_user.id == 1 %}
+        {% if current_user.id == 1 or current_user.id == post.author_id %}
         <div class="clearfix">
           <a class="btn btn-primary float-right" href="{{url_for('edit', post_id=post.id)}}">Edit Post</a>
         </div>
@@ -54,6 +63,12 @@
               <div class="commentText">
                 <p>{{ comment.comment | safe }}</p>
                 <span class="date sub-text">{{ comment.user.name }}</span>
+                {% if current_user.id == 1%}
+                <br>
+                <form action="{{ url_for('delete_comment', comment_id=comment.id) }}" method="post">
+                  <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                </form>
+                {% endif %}
               </div>
             </li>
             {% endfor %}

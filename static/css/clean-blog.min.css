@@ -126,9 +126,9 @@ blockquote {
 }
 
 .sub-text {
-    color: #aaa;
+    color: #818181;
     font-family: verdana;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .actionBox {
@@ -491,7 +491,15 @@ footer .copyright {
     text-align: center
 }
 
-.btn {
+.btn-danger {
+    font-weight: 800;
+    text-transform: uppercase;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif
+}
+
+.btn-primary {
+    background-color: #0085a1;
+    border-color: #0085a1;
     font-size: 14px;
     font-weight: 800;
     padding: 15px 25px;
@@ -499,11 +507,6 @@ footer .copyright {
     text-transform: uppercase;
     border-radius: 0;
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif
-}
-
-.btn-primary {
-    background-color: #0085a1;
-    border-color: #0085a1
 }
 
 .btn-primary:active,

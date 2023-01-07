@@ -28,6 +28,15 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-danger" role="alert">
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
 
       <!-- This is where the form will go -->
       {% if '/new-post' in request.url %}
@@ -38,12 +47,23 @@
       
         {{ form.hidden_tag() }}
 
+        {% if '/new-post' in request.url %}
         <div class="form-group">
           {{ form.title.label(class_='form-label') }} <br> {{ form.title(autofocus=True, class_='form-control') }}
           {% for err in form.title.errors %}
           <span style="color: red;">{{ err }}</span>
           {% endfor %}
         </div>
+        {% else %}
+        <div class="form-group">
+          {{ form.title.label(class_='form-label') }} <br> {{ form.title(readonly=True, class_='form-control') }}
+          {% for err in form.title.errors %}
+          <span style="color: red;">{{ err }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        
 
         <div class="form-group">
           {{ form.subtitle.label(class_='form-label') }} <br> {{ form.subtitle(class_='form-control') }}
