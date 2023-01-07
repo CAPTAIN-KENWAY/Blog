@@ -69,7 +69,7 @@ def send_mail(name, email, phone, message):
         connection.login(user=EMAIL, password=PASSWORD)
         connection.sendmail(
             from_addr=EMAIL,
-            to_addrs="guptakaran094@gmail.com",
+            to_addrs="youremail@gmail.com",
             msg=msg.encode('utf-8')
         )
 
